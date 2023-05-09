@@ -5,15 +5,29 @@ const axios = require("axios");
 
 const API_URL = 'https://www.omdbapi.com/?i=tt3896198&apikey=5e347079&s=';
 
+const drawDecorativeLine = () => console.log('=-=-=-=-=-=-=-=-=-=-=-=-');
+
 function generateUrlWithTitle(inputtedParams) {
     const url = API_URL + inputtedParams;
     return encodeURI(url);
 }
 
+function showFilms(films) {
+    films.forEach(film => showFilm(film));
+}
+
+function showFilm(film) {
+    const { Title, Year, Poster } = film;
+    console.log(Title, `(${Year})`);
+    console.log(Poster);
+    drawDecorativeLine();
+}
+
 async function startSearch (answer) {
     const searchURL = generateUrlWithTitle(answer);
-    const searchResult = await axios.get(searchURL);
-    // here making beautiful logs
+    const response = await axios.get(searchURL);
+    drawDecorativeLine();
+    showFilms(response.data.Search);
 }
 
 const rl = readline.createInterface({
