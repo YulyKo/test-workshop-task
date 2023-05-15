@@ -1,4 +1,4 @@
-# Stating
+# Starting
 
 ### Step 1: install all packages
 
